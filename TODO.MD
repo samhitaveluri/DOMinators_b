@@ -38,10 +38,12 @@ CREATE TABLE Holdings (
 CREATE TABLE Transactions (
     id INT PRIMARY KEY AUTO_INCREMENT,
     type ENUM('Income', 'Expense', 'Investment', 'Withdrawal') NOT NULL,
+    holding_id INT NOT NULL,
     amount DECIMAL(15, 2) NOT NULL,
     date DATE NOT NULL,
     description VARCHAR(255),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (holding_id) REFERENCES Holdings(id)
 );
 ```
 
