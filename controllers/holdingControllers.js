@@ -2,6 +2,7 @@ import { assetSchema } from '../schemas/assetValidation.js';
 import { holdingSchema } from '../schemas/holdingValidation.js';
 import { transactionSchema } from '../schemas/transactionValidation.js';
 import pool from '../config/db.js';
+import { parse } from 'dotenv';
 
 export const buyAsset = async (req, res) => {
     const { asset_id, quantity } = req.body;
@@ -113,3 +114,67 @@ export const viewHoldingById = async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
+
+export const sellHolding = async (req, res) => {
+    const { holding_id, quantity } = req.body;
+
+    try {
+        const connection = await pool.getConnection();
+        await connection.beginTransaction();
+
+        try {
+            const [holding] = await connection.query(
+                'SELECT * FROM Holdings WHERE id = ? AND isOwn = true',
+                [holding_id]
+            );
+
+            if (holding.length === 0) {
+                await connection.rollback();
+                return res.status(404).json({ message: 'Holding not found' });
+            }
+
+            if (quantity <= 0 || quantity > holding[0].quantity) {
+                await connection.rollback();
+                return res.status(400).json({ message: 'Invalid quantity' });
+            }
+
+            let [asset] = await connection.query(
+                'SELECT * FROM Assets JOIN Holdings ON Assets.id = Holdings.asset_id WHERE Holdings.id = ?',[holding_id]
+            )
+
+            const saleAmount = asset[0].price * quantity;
+
+            if (parseFloat(holding[0].quantity) === parseFloat(quantity)) {
+                await connection.query(`UPDATE Holdings SET quantity = 0, isOwn = 0 WHERE id = ${holding_id}`);
+            } else {
+                await connection.query(
+                    'UPDATE Holdings SET quantity = quantity - ? WHERE id = ?',
+                    [quantity, holding_id]
+                );
+            }
+
+            await connection.query(
+                'UPDATE Settlements SET amount = amount + ?',
+                [saleAmount]
+            );
+
+            await connection.query(
+                'INSERT INTO Transactions (type, holding_id, amount, date, description) VALUES (?, ?, ?, CURDATE(), ?)',
+                ['Withdrawal', holding_id, saleAmount, `Sold ${quantity} units of ${asset[0].name}`]
+            );
+
+            await connection.commit();
+            res.status(200).json({ message: 'Holding sold successfully', sale_amount: saleAmount });
+
+        } catch (error) {
+            await connection.rollback();
+            throw error;
+        } finally {
+            connection.release();
+        }
+
+    } catch (error) {
+        console.error('Error selling holding:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+}
