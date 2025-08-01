@@ -25,6 +25,7 @@ CREATE TABLE Assets (
 CREATE TABLE Holdings (
     id INT PRIMARY KEY AUTO_INCREMENT,
     asset_id INT NOT NULL,
+    isOwn BOOLEAN NOT NULL,
     quantity DECIMAL(15, 2) NOT NULL,
     purchase_price DECIMAL(15, 2) NOT NULL,
     purchase_date DATE NOT NULL,
