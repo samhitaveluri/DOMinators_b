@@ -6,4 +6,5 @@ const router = express.Router();
 router.route('/get-all').get(getAllAssets);
 router.route('/get/:id').get(getAssetById);
 
-module.exports = router;   
+  
+export default router;
