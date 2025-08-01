@@ -2,6 +2,8 @@
 - [ ] insights maybe
 - [ ] settlements account
 - [ ] gains and losses 
+- [ ] use use strict
+- [ ] protection - auth 
 
 Here’s the updated database schema with the `user_id` field removed and a `created_at` field added to every table. Additionally, I’ve included a user story for your financial dashboard.
 
