@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllAssets, getAssetById } from '../controllers/assetController.js';
+import { getAllAssets, getAssetById } from '../controllers/assetControllers.js';
 const router = express.Router();
 
 // router.route('/add')
