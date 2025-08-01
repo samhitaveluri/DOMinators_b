@@ -84,6 +84,15 @@ CREATE TABLE InvestmentSummary (
 );
 ```
 
+#### 7. **Settlements**
+```sql
+CREATE TABLE Settlements(
+    amount DECIMAL(20, 2)
+);
+
+INSERT INTO Settlements (amount) VALUES (100000);
+```
+
 ####Inserting values into assets
 
 INSERT INTO Assets (id, name, type, price, created_at) VALUES

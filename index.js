@@ -8,6 +8,7 @@ dotenv.config();
 
 // Import routes
 import assetRoutes from './routes/assetRouters.js';
+import holdingRoutes from './routes/holdingRouters.js'
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -20,6 +21,7 @@ app.get('/api', (req, res) => {
 });
 
 app.use('/api/assets', assetRoutes);
+app.use('/api/holdings', holdingRoutes);
 
 const server = app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

@@ -1,0 +1,155 @@
+{
+	"info": {
+		"_postman_id": "a6094068-7cc5-4011-9bb7-620bc8f90c1d",
+		"name": "DOMinators",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47250550",
+		"_collection_link": "https://selvexter007-6408964.postman.co/workspace/Selvexter-Hoshino's-Workspace~aac8b048-0712-4e73-8dee-c6c8dde649e6/collection/47250550-a6094068-7cc5-4011-9bb7-620bc8f90c1d?action=share&source=collection_link&creator=47250550"
+	},
+	"item": [
+		{
+			"name": "Holdings",
+			"item": [
+				{
+					"name": "Buy a stock",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"asset_id\": 1,\n    \"quantity\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/holdings/buy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"holdings",
+								"buy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View all holdings",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"asset_id\": 1,\n    \"quantity\": 10\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/holdings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"holdings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Holding By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/holdings/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"holdings",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Assets",
+			"item": [
+				{
+					"name": "Get all assets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/assets/get-all",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"assets",
+								"get-all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get asset by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/assets/get/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"assets",
+								"get",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:3000",
+			"type": "default"
+		}
+	]
+}
