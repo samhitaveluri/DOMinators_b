@@ -135,3 +135,45 @@ INSERT INTO Assets (id, name, type, price, created_at) VALUES
 (28, 'Bitcoin', 'Other', 29500.67, '2025-08-01 10:27:00'),
 (29, 'Ethereum', 'Other', 1850.25, '2025-08-01 10:28:00'),
 (30, 'Real Estate Investment Trust - Vanguard', 'Other', 92.45, '2025-08-01 10:29:00');
+
+
+<!-- Asset prices Table -->
+
+
+CREATE TABLE asset_prices (
+    asset_id INT PRIMARY KEY,
+    base_present_price DECIMAL(15,2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO asset_prices (asset_id, base_present_price) VALUES
+(1, 195.25),
+(2, 345.67),
+(3, 267.89),
+(4, 142.34),
+(5, 128.56),
+(6, 321.45),
+(7, 440.12),
+(8, 354.98),
+(9, 168.75),
+(10, 240.34),
+(11, 110.45),
+(12, 160.78),
+(13, 152.67),
+(14, 65.89),
+(15, 25.45),
+(16, 1000.00),
+(17, 1000.00),
+(18, 995.50),
+(19, 998.75),
+(20, 1020.25),
+(21, 1.00),
+(22, 1.10),
+(23, 1.28),
+(24, 1.00),
+(25, 1.00),
+(26, 1985.45),
+(27, 25.34),
+(28, 29500.67),
+(29, 1850.25),
+(30, 92.45);

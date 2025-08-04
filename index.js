@@ -24,6 +24,29 @@ app.use('/api/assets', assetRoutes);
 app.use('/api/holdings', holdingRoutes);
 app.use('/api/transactions', transactionRoutes);
 
+
+async function updatePricesRandomly() {
+  try {
+    const [assets] = await pool.query('SELECT id, price FROM Assets');
+
+    for (let asset of assets) {
+      const change = (Math.random() * 20) - 10; // Random change between -10 and +10
+      const newPrice = Math.max(0, (parseFloat(asset.price) + change).toFixed(2));
+
+      await pool.query(
+        'UPDATE Assets SET price = ?, created_at = NOW() WHERE id = ?',
+        [newPrice, asset.id]
+      );
+    }
+
+    // console.log(`Prices updated at ${new Date().toLocaleTimeString()}`);
+  } catch (err) {
+    console.error('Error updating prices:', err);
+  }
+}
+
+setInterval(updatePricesRandomly, 1000);
+
 const server = app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
