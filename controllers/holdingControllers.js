@@ -38,7 +38,7 @@ export const buyAsset = async (req, res) => {
             const newAvgPrice = ((oldQty * oldPrice) + (quantity * asset[0].price)) / newQty;
 
             await connection.query(
-                'UPDATE Holdings SET quantity = ?, purchase_price = ? WHERE id = ?',
+                'UPDATE Holdings SET quantity = ?, purchase_price = ? , purchase_date = CURDATE()  WHERE id = ?',
                 [newQty, newAvgPrice, existingHolding[0].id]
             );
 
