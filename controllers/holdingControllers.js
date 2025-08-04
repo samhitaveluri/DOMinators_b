@@ -23,6 +23,27 @@ export const buyAsset = async (req, res) => {
                 await connection.rollback();
                 return res.status(404).json({ message: 'Asset not found' });
             }
+            const [existingHolding] = await connection.query(
+            'SELECT * FROM Holdings WHERE asset_id = ? AND isOwn = true',
+            [asset_id]
+            );
+
+            let holdingId;
+
+            if (existingHolding.length > 0) {
+            const oldQty = parseFloat(existingHolding[0].quantity);
+            const oldPrice = parseFloat(existingHolding[0].purchase_price);
+
+            const newQty = oldQty + quantity;
+            const newAvgPrice = ((oldQty * oldPrice) + (quantity * asset[0].price)) / newQty;
+
+            await connection.query(
+                'UPDATE Holdings SET quantity = ?, purchase_price = ? WHERE id = ?',
+                [newQty, newAvgPrice, existingHolding[0].id]
+            );
+
+            holdingId = existingHolding[0].id;
+            } else {
 
             // 2. Calculate total cost
             const totalCost = asset[0].price * quantity;
@@ -45,6 +66,8 @@ export const buyAsset = async (req, res) => {
                 'INSERT INTO Holdings (asset_id, isOwn, quantity, purchase_price, purchase_date) VALUES (?, true, ?, ?, CURDATE())',
                 [asset_id, quantity, asset[0].price]
             );
+
+            holdingId = holding.insertId;
 
             // 4. Create transaction record
             await connection.query(
