@@ -43,9 +43,24 @@ export const buyAsset = async (req, res) => {
             );
 
             holdingId = existingHolding[0].id;
-            } else {
+            } 
+            else 
+            {
 
-            // 2. Calculate total cost
+            
+
+            // Create holding
+            const [holding] = await connection.query(
+                'INSERT INTO Holdings (asset_id, isOwn, quantity, purchase_price, purchase_date) VALUES (?, true, ?, ?, CURDATE())',
+                [asset_id, quantity, asset[0].price]
+            );
+
+            holdingId = holding.insertId;
+
+           
+        }
+
+        // 2. Calculate total cost
             const totalCost = asset[0].price * quantity;
 
             // Check if user has enough money
@@ -60,25 +75,15 @@ export const buyAsset = async (req, res) => {
                 'UPDATE Settlements SET amount = amount - ?',
                 [totalCost]
             );
-
-            // Create holding
-            const [holding] = await connection.query(
-                'INSERT INTO Holdings (asset_id, isOwn, quantity, purchase_price, purchase_date) VALUES (?, true, ?, ?, CURDATE())',
-                [asset_id, quantity, asset[0].price]
-            );
-
-            holdingId = holding.insertId;
-
-            // 4. Create transaction record
-            await connection.query(
+             // 4. Create transaction record
+             await connection.query(
                 'INSERT INTO Transactions (type, holding_id, amount, date, description) VALUES (?, ?, ?, CURDATE(), ?)',
-                ['Investment', holding.insertId, totalCost, `Purchased ${quantity} units of ${asset[0].name}`]
+                ['Investment', holdingId, totalCost, `Purchased ${quantity} units of ${asset[0].name}`]
             );
-
             await connection.commit();
             res.status(201).json({
                 message: 'Asset purchased successfully',
-                holding_id: holding.insertId,
+                holding_id: holdingId,
                 total_cost: totalCost
             });
 
