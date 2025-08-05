@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for schemas/assetValidation.js</title>
+    <title>Code coverage report for schemas/transactionValidation.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">schemas</a> assetValidation.js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">schemas</a> transactionValidation.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
@@ -79,7 +79,13 @@
 <a name='L14'></a><a href='#L14'>14</a>
 <a name='L15'></a><a href='#L15'>15</a>
 <a name='L16'></a><a href='#L16'>16</a>
-<a name='L17'></a><a href='#L17'>17</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -94,22 +100,31 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// CREATE TABLE Assets (
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// CREATE TABLE Transactions (
 //     id INT PRIMARY KEY AUTO_INCREMENT,
-//     name VARCHAR(100) NOT NULL,
-//     type ENUM('Stock', 'Mutual Fund', 'Bond', 'Cash', 'Other') NOT NULL,
-//     price DECIMAL(15, 2) NOT NULL,
-//     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+//     type ENUM('Income', 'Expense', 'Investment', 'Withdrawal') NOT NULL,
+//     holding_id INT NOT NULL,
+//     amount DECIMAL(15, 2) NOT NULL,
+//     date DATE NOT NULL,
+//     description VARCHAR(255),
+//     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+//     FOREIGN KEY (holding_id) REFERENCES Holdings(id)
 // );
-&nbsp;
 import { z } from 'zod';
-&nbsp;
-export const assetSchema = z.object({
-  id: z.number().int().positive(), // Asset ID must be a positive integer
-  name: z.string().min(1, 'Name is required'), // Name must be a non-empty string
-  type: z.enum(['Stock', 'Mutual Fund', 'Bond', 'Cash', 'Other']), // Type must match one of the allowed values
-  price: z.number().nonnegative(), // Price must be a non-negative number
+export const transactionSchema = z.object({
+  id: z.number().int().positive(), // Transaction ID must be a positive integer
+  type: z.enum(['Income', 'Expense', 'Investment', 'Withdrawal']), // Type must match one of the allowed values
+  holding_id: z.number().int().positive(), // Holding ID must be a positive integer
+  amount: z.number().nonnegative(), // Amount must be a non-negative number
+  date: z.string().refine(date =&gt; !isNaN(Date.parse(date)), {
+    message: 'Date must be a valid date string',
+  }), // Date must be a valid date string
+  description: z.string().max(255).optional(), // Optional description with a maximum length of 255 characters
   created_at: z.string().optional(), // Optional timestamp
 });</pre></td></tr></table></pre>
 
