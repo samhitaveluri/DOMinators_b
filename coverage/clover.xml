@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1754377402164" clover="3.2.0">
-  <project timestamp="1754377402164" name="All files">
-    <metrics statements="21" coveredstatements="21" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3" elements="26" coveredelements="26" complexity="0" loc="21" ncloc="21" packages="3" files="4" classes="4"/>
+<coverage generated="1754382133855" clover="3.2.0">
+  <project timestamp="1754382133855" name="All files">
+    <metrics statements="27" coveredstatements="27" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="4" elements="33" coveredelements="33" complexity="0" loc="27" ncloc="27" packages="3" files="5" classes="5"/>
     <package name="config">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="db.js" path="C:\Users\Administrator\Desktop\DOMinators_b\config\db.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
       </file>
     </package>
     <package name="controllers">
-      <metrics statements="16" coveredstatements="16" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+      <metrics statements="22" coveredstatements="22" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
       <file name="assetControllers.js" path="C:\Users\Administrator\Desktop\DOMinators_b\controllers\assetControllers.js">
         <metrics statements="16" coveredstatements="16" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="5" count="1" type="stmt"/>
@@ -30,6 +30,15 @@
         <line num="28" count="1" type="stmt"/>
         <line num="30" count="2" type="stmt"/>
         <line num="31" count="2" type="stmt"/>
+      </file>
+      <file name="settlementControllers.js" path="C:\Users\Administrator\Desktop\DOMinators_b\controllers\settlementControllers.js">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
       </file>
     </package>
     <package name="schemas">
