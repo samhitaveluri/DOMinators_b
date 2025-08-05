@@ -46,7 +46,7 @@ describe('Settlement Controllers', () => {
 
       expect(pool.query).toHaveBeenCalledWith('SELECT * FROM settlements');
       expect(res.status).toHaveBeenCalledWith(500);
-      expect(res.json).toHaveBeenCalledWith({ error: 'Failed to fetch transactions' });
+      expect(res.json).toHaveBeenCalledWith({ error: 'Failed to fetch settlements' });
     });
   });
 });

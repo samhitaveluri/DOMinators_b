@@ -17,6 +17,7 @@
     "jest": "^30.0.5",
     "joi": "^18.0.0",
     "mysql2": "^3.14.3",
+    "node-schedule": "^2.1.1",
     "nodmeon": "^0.0.1-security",
     "zod": "^4.0.14"
   },

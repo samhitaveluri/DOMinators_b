@@ -177,3 +177,6 @@ INSERT INTO asset_prices (asset_id, base_present_price) VALUES
 (28, 29500.67),
 (29, 1850.25),
 (30, 92.45);
+
+## Command to install node-schedule;
+npm install node-schedule
