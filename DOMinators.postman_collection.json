@@ -11,7 +11,7 @@
 			"name": "Holdings",
 			"item": [
 				{
-					"name": "Buy a stock",
+					"name": "Buy an asset",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -22,7 +22,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"asset_id\": 1,\n    \"quantity\": 10\n}",
+							"raw": "{\n    \"asset_id\": 2,\n    \"quantity\": 10\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -97,6 +97,34 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Sell a holding",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"holding_id\": 2,\r\n    \"quantity\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/holdings/sell",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"holdings",
+								"sell"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -143,6 +171,73 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Transactions",
+			"item": [
+				{
+					"name": "Get all Transactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/transactions/get-all-transactions",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"transactions",
+								"get-all-transactions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Summary",
+			"item": [
+				{
+					"name": "Portfoliio summary",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/portfolio/summary",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"portfolio",
+								"summary"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Settlements Balance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/settlements/viewBalance",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"settlements",
+						"viewBalance"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"variable": [
