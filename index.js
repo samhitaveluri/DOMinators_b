@@ -32,7 +32,7 @@ async function updatePricesRandomly() {
     const [assets] = await pool.query('SELECT id, price FROM Assets');
 
     for (let asset of assets) {
-      const change = (Math.random() * 20) - 10; // Random change between -10 and +10
+      const change = (Math.random() * 2) - 1; // Random change between -1 and +1
       const newPrice = Math.max(0, (parseFloat(asset.price) + change).toFixed(2));
 
       await pool.query(
