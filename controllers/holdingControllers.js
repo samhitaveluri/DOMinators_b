@@ -31,36 +31,31 @@ export const buyAsset = async (req, res) => {
             let holdingId;
 
             if (existingHolding.length > 0) {
-            const oldQty = parseFloat(existingHolding[0].quantity);
-            const oldPrice = parseFloat(existingHolding[0].purchase_price);
+                const oldQty = parseFloat(existingHolding[0].quantity);
+                const oldPrice = parseFloat(existingHolding[0].purchase_price);
 
-            const newQty = oldQty + quantity;
-            const newAvgPrice = ((oldQty * oldPrice) + (quantity * asset[0].price)) / newQty;
+                const newQty = oldQty + quantity;
+                const newAvgPrice = ((oldQty * oldPrice) + (quantity * asset[0].price)) / newQty;
 
-            await connection.query(
-                'UPDATE Holdings SET quantity = ?, purchase_price = ? , purchase_date = CURDATE()  WHERE id = ?',
-                [newQty, newAvgPrice, existingHolding[0].id]
-            );
+                await connection.query(
+                    'UPDATE Holdings SET quantity = ?, purchase_price = ? , purchase_date = CURDATE()  WHERE id = ?',
+                    [newQty, newAvgPrice, existingHolding[0].id]
+                );
 
-            holdingId = existingHolding[0].id;
+                holdingId = existingHolding[0].id;
             } 
             else 
             {
+                // Create holding
+                const [holding] = await connection.query(
+                    'INSERT INTO Holdings (asset_id, isOwn, quantity, purchase_price, purchase_date) VALUES (?, true, ?, ?, CURDATE())',
+                    [asset_id, quantity, asset[0].price]
+                );
 
-            
+                holdingId = holding.insertId;
+            }
 
-            // Create holding
-            const [holding] = await connection.query(
-                'INSERT INTO Holdings (asset_id, isOwn, quantity, purchase_price, purchase_date) VALUES (?, true, ?, ?, CURDATE())',
-                [asset_id, quantity, asset[0].price]
-            );
-
-            holdingId = holding.insertId;
-
-           
-        }
-
-        // 2. Calculate total cost
+            // 2. Calculate total cost
             const totalCost = asset[0].price * quantity;
 
             // Check if user has enough money

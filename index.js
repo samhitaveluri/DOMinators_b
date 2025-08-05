@@ -11,6 +11,8 @@ import assetRoutes from './routes/assetRouters.js';
 import holdingRoutes from './routes/holdingRouters.js'
 import transactionRoutes from './routes/transactionRouters.js';
 import settlementRoutes from './routes/settlementRoutes.js';
+import portfolioRoutes from './routes/portfolioRouters.js';
+
 const PORT = process.env.PORT || 3000;
 const app = express();
 
@@ -25,7 +27,7 @@ app.use('/api/assets', assetRoutes);
 app.use('/api/holdings', holdingRoutes);
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/settlements', settlementRoutes);
-
+app.use('/api/portfolio', portfolioRoutes);
 
 async function updatePricesRandomly() {
   try {
