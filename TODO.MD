@@ -180,3 +180,36 @@ INSERT INTO asset_prices (asset_id, base_present_price) VALUES
 
 ## Command to install node-schedule;
 npm install node-schedule
+
+
+##Inserting rows into networth
+INSERT INTO NetWorth (total, date) VALUES (98500.00,  '2025-07-07');
+INSERT INTO NetWorth (total, date) VALUES (98620.00,  '2025-07-08');
+INSERT INTO NetWorth (total, date) VALUES (98810.00,  '2025-07-09');
+INSERT INTO NetWorth (total, date) VALUES (98900.00,  '2025-07-10');
+INSERT INTO NetWorth (total, date) VALUES (99050.00,  '2025-07-11');
+INSERT INTO NetWorth (total, date) VALUES (99200.00,  '2025-07-12');
+INSERT INTO NetWorth (total, date) VALUES (99400.00,  '2025-07-13');
+INSERT INTO NetWorth (total, date) VALUES (99550.00,  '2025-07-14');
+INSERT INTO NetWorth (total, date) VALUES (99780.00,  '2025-07-15');
+INSERT INTO NetWorth (total, date) VALUES (99890.00,  '2025-07-16');
+INSERT INTO NetWorth (total, date) VALUES (100100.00, '2025-07-17');
+INSERT INTO NetWorth (total, date) VALUES (100250.00, '2025-07-18');
+INSERT INTO NetWorth (total, date) VALUES (100420.00, '2025-07-19');
+INSERT INTO NetWorth (total, date) VALUES (100610.00, '2025-07-20');
+INSERT INTO NetWorth (total, date) VALUES (100800.00, '2025-07-21');
+INSERT INTO NetWorth (total, date) VALUES (100950.00, '2025-07-22');
+INSERT INTO NetWorth (total, date) VALUES (101100.00, '2025-07-23');
+INSERT INTO NetWorth (total, date) VALUES (101220.00, '2025-07-24');
+INSERT INTO NetWorth (total, date) VALUES (101350.00, '2025-07-25');
+INSERT INTO NetWorth (total, date) VALUES (101480.00, '2025-07-26');
+INSERT INTO NetWorth (total, date) VALUES (101600.00, '2025-07-27');
+INSERT INTO NetWorth (total, date) VALUES (101750.00, '2025-07-28');
+INSERT INTO NetWorth (total, date) VALUES (101880.00, '2025-07-29');
+INSERT INTO NetWorth (total, date) VALUES (102000.00, '2025-07-30');
+INSERT INTO NetWorth (total, date) VALUES (102130.00, '2025-07-31');
+INSERT INTO NetWorth (total, date) VALUES (102250.00, '2025-08-01');
+INSERT INTO NetWorth (total, date) VALUES (102370.00, '2025-08-02');
+INSERT INTO NetWorth (total, date) VALUES (102500.00, '2025-08-03');
+INSERT INTO NetWorth (total, date) VALUES (102600.00, '2025-08-04');
+INSERT INTO NetWorth (total, date) VALUES (102700.00, '2025-08-05');
