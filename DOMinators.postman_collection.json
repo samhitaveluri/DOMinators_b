@@ -221,6 +221,19 @@
 			]
 		},
 		{
+			"name": "Net Worth",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Get Settlements Balance",
 			"request": {
 				"method": "GET",
