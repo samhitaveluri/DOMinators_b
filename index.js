@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import pool from './config/db.js'; 
 import schedule from 'node-schedule';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
@@ -14,12 +15,14 @@ import transactionRoutes from './routes/transactionRouters.js';
 import settlementRoutes from './routes/settlementRoutes.js';
 import portfolioRoutes from './routes/portfolioRouters.js';
 import networthRouters from './routes/networthRouters.js';
+import authRoutes from './routes/authRouters.js';
 
 const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.get('/api', (req, res) => {
   res.send('Hi Mom');
@@ -31,6 +34,7 @@ app.use('/api/transactions', transactionRoutes);
 app.use('/api/settlements', settlementRoutes);
 app.use('/api/portfolio', portfolioRoutes);
 app.use('/api/networth', networthRouters);
+app.use('/api/auth', authRoutes);
 
 async function updatePricesRandomly() {
   try {

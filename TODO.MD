@@ -213,3 +213,12 @@ INSERT INTO NetWorth (total, date) VALUES (102370.00, '2025-08-02');
 INSERT INTO NetWorth (total, date) VALUES (102500.00, '2025-08-03');
 INSERT INTO NetWorth (total, date) VALUES (102600.00, '2025-08-04');
 INSERT INTO NetWorth (total, date) VALUES (102700.00, '2025-08-05');
+
+-- Create the Users table
+CREATE TABLE Users (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  username VARCHAR(50) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  security_pin VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
